@@ -21,7 +21,7 @@ def hash_password(password):
 
 def verify_password(plain_text_password, hashed_password):
     """Verify hashed password."""
-    return bcrypt.checkpw(plain_text_password.encode(), hashed_password.encode())
+    return bcrypt.hashpw(plain_text_password.encode(), hashed_password.encode()) == hashed_password.encode()
 
 def username_exists(username):
     """Check if username already exists in Supabase."""
