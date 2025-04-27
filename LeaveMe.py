@@ -16,20 +16,16 @@ if "user" not in st.session_state:
 Roles = ["Employer", "Employee"]
 
 def hash_password(password):
-    """Hash password using bcrypt."""
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 def verify_password(plain_text_password, hashed_password):
-    """Verify hashed password."""
-    return bcrypt.hashpw(plain_text_password.encode(), hashed_password.encode()) == hashed_password.encode()
+    return bcrypt.checkpw(plain_text_password.encode(), hashed_password.encode())
 
 def username_exists(username):
-    """Check if username already exists in Supabase."""
     response = supabase.table("users").select("username").eq("username", username).execute()
     return len(response.data) > 0
 
 def signup():
-    """User signup page."""
     st.header("Sign Up")
 
     username = st.text_input("Choose a Username", key="signup_username")
