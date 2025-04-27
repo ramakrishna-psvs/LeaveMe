@@ -15,12 +15,14 @@ if "user" not in st.session_state:
 
 Roles = ["Employer", "Employee"]
 
+# Password hashing and verification
 def hash_password(password):
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 def verify_password(plain_text_password, hashed_password):
     return bcrypt.checkpw(plain_text_password.encode(), hashed_password.encode())
 
+# Check if username exists in the database
 def username_exists(username):
     response = supabase.table("users").select("username").eq("username", username).execute()
     return len(response.data) > 0
