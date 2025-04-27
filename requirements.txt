@@ -2,4 +2,4 @@ supabase
 pandas
 streamlit
 st-supabase-connection
-py-bcrypt
+python-bcrypt
